@@ -157,3 +157,33 @@ Et pour ça on va crééer une méthode spécifique.
         return (array) $data;
     }
 ```
+
+On va ajouter une **action** du contrôleur qui prendre un paramètre dans l'url:
+
+```php
+/**
+     * Action pour rechercher le temps pour une ville donée
+     * 
+     * @Route(
+     *  "/query/{cityName}",
+     *  name="Query Weather to a given city"
+     * )
+     */
+    public function query( $cityName )
+    {
+
+        return $this->render(
+            'weather/query.html.twig', 
+            [
+                'cityName' => $cityName,
+                'controller_name' => 'WeatherController',
+            ]
+        );
+    }
+```
+
+Et le **template** recevra le paramètre **cityName**
+```twig
+<h2>Nom de la ville donnée: {{ cityName }}! ✅</h2>
+```
+
