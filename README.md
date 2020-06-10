@@ -45,4 +45,47 @@ On donne le nom **IndexController** et deux fichiers sont créés.
  -------------------------- -------- -------- ------ -----------------------------------
  ```
 
- 
+ On voit tout en bas, une nouvelle route **index** a été ajoutée.
+
+ ## Contrôleur IndexController
+
+ On teste la route URL/index.
+
+ En cas d'erreur, il faut installer la dépendance **apache-pack**
+
+
+
+ ```bash
+➜  API_OPENWEATHER git:(master) ✗ composer require symfony/apache-pack
+Using version ^1.0 for symfony/apache-pack
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Restricting packages listed in "symfony/symfony" to "5.1.*"
+Package operations: 1 install, 0 updates, 0 removals
+  - Installing symfony/apache-pack (v1.0.1): Downloading (100%)
+Package zendframework/zend-code is abandoned, you should avoid using it. Use laminas/laminas-code instead.
+Package zendframework/zend-eventmanager is abandoned, you should avoid using it. Use laminas/laminas-eventmanager instead.
+Writing lock file
+Generating optimized autoload files
+ocramius/package-versions: Generating version class...
+ocramius/package-versions: ...done generating version class
+Symfony operations: 1 recipe (a3408b291625e5f9c5d7bbb30b47b38e)
+  -  WARNING  symfony/apache-pack (>=1.0): From github.com/symfony/recipes-contrib:master
+    The recipe for this package comes from the "contrib" repository, which is open to community contributions.
+    Review the recipe at https://github.com/symfony/recipes-contrib/tree/master/symfony/apache-pack/1.0
+
+    Do you want to execute this recipe?
+    [y] Yes
+    [n] No
+    [a] Yes for all packages, only for the current installation session
+    [p] Yes permanently, never ask again for this project
+    (defaults to n): y
+  - Configuring symfony/apache-pack (>=1.0): From github.com/symfony/recipes-contrib:master
+Executing script cache:clear [OK]
+Executing script assets:install public [OK]
+
+Some files may have been created or updated to configure your new packages.
+Please review, edit and commit them: these files are yours.
+```
+
