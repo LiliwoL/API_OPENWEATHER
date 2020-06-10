@@ -9,12 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Coucou {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/niko/www/formation/Symfony/API_OPENWEATHER/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/niko/www/formation/Symfony/API_OPENWEATHER/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>
-    </ul>
+    Saisissez une ville:
+    <form>
+        <input type="text" name="query" placeholder="New York, Istanbul, Bobo Dioulasso..." />
+        <button>Chercher</button>
+    </form>
 </div>
 {% endblock %}

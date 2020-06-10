@@ -89,3 +89,71 @@ Some files may have been created or updated to configure your new packages.
 Please review, edit and commit them: these files are yours.
 ```
 
+## Contrôleur WeatherController
+
+Ce contrôleur permetrra la requête auprès de l'API
+
+```bash
+➜  API_OPENWEATHER git:(master) ✗ php bin/console make:controller
+
+ Choose a name for your controller class (e.g. GrumpyChefController):
+ > WeatherController
+
+ created: src/Controller/WeatherController.php
+ created: templates/weather/index.html.twig
+
+
+  Success!
+
+
+ Next: Open your new controller class and add some pages!
+```
+
+### On veut une route d'appel avec un paramètre dans l'url
+
+Du genre:
+**URL/query/NOM_DE_LA_VILLE**
+
+Pour faire une requête auprès d'un autre site on va utiliser **CURL**.
+Et pour ça on va crééer une méthode spécifique.
+
+```php
+    /**
+     * Fonction qui exécutera la requete en cURL
+     *
+     * @param string $url
+     * @return array
+     */
+    private function makeRequest ( string $url )
+    {
+        // Initialisation de cURL
+        $ch = curl_init();
+        // Will return the response, if false it print the response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Au cas où on a un souci avec le SSL
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+
+        // Execute
+        $result=curl_exec($ch);
+
+        // En cas d'erreur
+        if ( $result === false )
+        {
+            // Affichage de l'erreur
+            dump ( curl_error($ch) );
+        }
+
+        // Closing
+        curl_close($ch);
+
+        // Decodage du JSON reçu
+        $data = json_decode($result, true);
+
+        // Renvoi du tableau JSON
+        return (array) $data;
+    }
+```
