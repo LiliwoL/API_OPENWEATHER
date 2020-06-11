@@ -20,7 +20,7 @@ class WeatherController extends AbstractController
         // A partir du paramètre on va faire appel à l'API
 
         // Construire l'URL à appeler
-        $url = "http://api.openweathermap.org/data/2.5/forecast?APPID=ca18014071190091d4be752b98e34330&q=" . $cityName;
+        $url = "http://api.openweathermap.org/data/2.5/weather?lang=fr&units=metric&appid=ca18014071190091d4be752b98e34330&q=" . $cityName;
 
         // Utilisation de la méthode makeRequest avec l'url qu'on vient de construire
         $resultat = $this->makeRequest( $url );

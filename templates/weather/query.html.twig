@@ -8,12 +8,26 @@
     <div class="example-wrapper">
         <h1>Voici la météo de {{ cityName }}!</h1>
 
+        <div class="card" style="width: 18rem;">
+            <!-- Affichage de l'icône -->
+            <!-- https://openweathermap.org/weather-conditions -->
+            <img src="http://openweathermap.org/img/wn/{{ resultat.weather[0].icon }}@2x.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ resultat.name }}</h5>
+              <p class="card-text">Temps du jour: {{ resultat.weather[0].description }}</p>
+            </div>
+        </div>
+
+        <h2>Carte</h2>
+
+        <!-- Affichage d'une carte à partir des coordonnées -->
+        Coordonnées de la ville: 
+        Longitude {{ resultat.coord.lon }}
+        Latitude {{ resultat.coord.lat }}
+
         <div>
             Voici le dump du résultat
             {{ dump(resultat) }}
-
-            Heure de la prévision: {{ resultat.list[0].dt_txt }}
-            Temps qu'il fait: {{ resultat.list[0].weather[0].main }}
         </div>
     </div>
 {% endblock %}
