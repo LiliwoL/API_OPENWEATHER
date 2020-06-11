@@ -25,14 +25,33 @@ class WeatherController extends AbstractController
         // Utilisation de la méthode makeRequest avec l'url qu'on vient de construire
         $resultat = $this->makeRequest( $url );
 
-        // On enverra le résultat au moteur de template pour affichage
-        return $this->render(
-            'weather/query.html.twig', 
-            [
-                'cityName' => $cityName,
-                'resultat' => $resultat
-            ]
-        );
+        // Test du résultat
+        //var_dump($resultat['cod']);
+        //die;
+
+        // Test du résultat
+        if ( $resultat['cod'] == "200" )
+        {
+            // On enverra le résultat au moteur de template pour affichage
+            return $this->render(
+                'weather/query.html.twig', 
+                [
+                    'cityName' => $cityName,
+                    'resultat' => $resultat
+                ]
+            );
+        }else{
+            // Non trouvé
+            // On enverra le résultat au moteur de template pour affichage
+            return $this->render(
+                'error/error.html.twig', 
+                [
+                    'cityName' => $cityName,
+                    'message' => $resultat['message']
+                ]
+            );
+        }
+        
     }
 
     /**
