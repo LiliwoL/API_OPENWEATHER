@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""/>
+
+    <!-- Chargement de la feuille de style du dossier public (assets) -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 {% endblock %}
 
 {% block title %}
@@ -12,8 +15,6 @@
 {% endblock %}
 
 {% block body %}
-    <style>#mapid { height: 180px; }</style>
-
     <div class="example-wrapper">
         <h1>Voici la météo de {{ cityName }}!</h1>
 
@@ -36,9 +37,6 @@
 
         <div id="mapid"></div>
 
-
-
-
         <div>
             Voici le dump du résultat
             {{ dump(resultat) }}
@@ -52,12 +50,6 @@
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
 
-    <script>
-        // Création de la carte
-        var map = L.map('mapid').setView([ {{ resultat.coord.lat }},{{ resultat.coord.lon }}], 10);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-    </script>
+    <!-- Chargement d'un script depuis le dossier des assets -->
+    <script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}
