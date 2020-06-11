@@ -1,5 +1,54 @@
 # Projet OpenWEATHER MAP
 
+## Monter son dossier en SSHFS avec un script
+
+```bash
+#! /bin/sh
+
+# Le dossier LOCAL
+LOCAL_DIR=/Users/niko/www/formation/CESI/DEV18.NTE.OVH/
+# PORT par défaut du SSH
+PORT=22
+# Nom d'utilisateur
+USER=intervenant
+# Adresse du serveur
+HOST=dev18.nte.ovh
+# Répertoire sur le serveur
+REMOTE_DIR=/home/intervenant/web/intervenant.dev18.nte.ovh/public_html/
+
+#IDENTITY_FILE="/Users/niko/.ssh/id_rsa.pub"
+
+
+export PATH=/usr/local/bin/:$PATH
+
+# Test si le dossier local existe
+# Sinon, il est créé
+if [ ! -d $LOCAL_DIR ]; then
+    echo "$LOCAL_DIR n'existe pas!"
+    mkdir $LOCAL_DIR
+fi
+
+# DéMontage
+echo "Démontage"
+sudo umount -f $LOCAL_DIR
+
+
+# Montage
+echo "Montage du répertoire"
+# Debug
+# -o debug,sshfs_debug,loglevel=debug
+sshfs -o allow_other,auto_cache,defer_permissions,noappledouble,negative_vncache,reconnect,transform_symlinks,follow_symlinks,volname=DEV18.NTE.OVH -C -p $PORT $USER@$HOST:$REMOTE_DIR $LOCAL_DIR > /Users/niko/Scripts/mountDEV18.log
+
+# Ouverture du répertoire avec Finder
+open $LOCAL_DIR
+
+# Retire et Ajoute dans les favoris
+mysides remove DEV18.NTE.OVH
+mysides add DEV18.NTE.OVH file://$LOCAL_DIR
+```
+
+
+
 
 ## Création de la homepage
 
@@ -110,6 +159,10 @@ Ce contrôleur permetrra la requête auprès de l'API
 ```
 
 ### On veut une route d'appel avec un paramètre dans l'url
+
+On va donc travailler dans le fichier
+
+**src/Controller/WeatherController.php**
 
 Du genre:
 **URL/query/NOM_DE_LA_VILLE**
