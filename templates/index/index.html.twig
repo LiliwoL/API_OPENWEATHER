@@ -3,9 +3,9 @@
 {% block title %}Bienvenue!{% endblock %}
 
 {% block body %}
-    <div class="example-wrapper">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
         Saisissez une ville svp:
-        <form>
+        <form action="{{ path('QueryWeatherCity') }}" method="GET">
             <input type="text" name="query" placeholder="New York, Istanbul, Bobo Dioulasso..." />
             <button>Chercher</button>
         </form>

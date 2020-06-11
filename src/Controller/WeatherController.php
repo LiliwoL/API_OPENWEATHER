@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class WeatherController extends AbstractController
 {
     /**
@@ -12,12 +14,15 @@ class WeatherController extends AbstractController
      * 
      * @Route(
      *  "/query/{cityName}",
-     *  name="Query Weather to a given city"
+     *  name="QueryWeatherCity"
      * )
      */
-    public function query( $cityName )
+    public function query( Request $request, $cityName = "" )
     {
         // A partir du paramètre on va faire appel à l'API
+
+        // Récupération des paramètres en GET
+        //$cityName = $request->query->get('query');
 
         // Construire l'URL à appeler
         $url = "http://api.openweathermap.org/data/2.5/weather?lang=fr&units=metric&appid=ca18014071190091d4be752b98e34330&q=" . $cityName;

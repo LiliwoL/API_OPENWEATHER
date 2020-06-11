@@ -35,6 +35,7 @@
         Longitude {{ resultat.coord.lon }}
         Latitude {{ resultat.coord.lat }}
 
+        <!-- Element qui recevra la carte -->
         <div id="mapid"></div>
 
         <div>
@@ -52,10 +53,13 @@
 
     <script>
         // Création de la carte avec des valeurs issues de resultat
-        var map = L.map('mapid').setView([ {{ resultat.coord.lat }},{{ resultat.coord.lon }}], 11);
+        var map = L.map('mapid').setView(
+            [ {{ resultat.coord.lat }},{{ resultat.coord.lon }} ]
+            , 11
+        );
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; CESI Superbe formation PHP'
         }).addTo(map);
     </script>
 
