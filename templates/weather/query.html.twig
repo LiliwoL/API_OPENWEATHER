@@ -12,6 +12,8 @@
 {% endblock %}
 
 {% block body %}
+    <style>#mapid { height: 180px; }</style>
+
     <div class="example-wrapper">
         <h1>Voici la météo de {{ cityName }}!</h1>
 
@@ -32,9 +34,30 @@
         Longitude {{ resultat.coord.lon }}
         Latitude {{ resultat.coord.lat }}
 
+        <div id="mapid"></div>
+
+
+
+
         <div>
             Voici le dump du résultat
             {{ dump(resultat) }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Leaflet's JS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+
+    <script>
+        // Création de la carte
+        var map = L.map('mapid').setView([ {{ resultat.coord.lat }},{{ resultat.coord.lon }}], 10);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
 {% endblock %}
