@@ -52,7 +52,7 @@
 
     <script>
         // Création de la carte avec des valeurs issues de resultat
-        var map = L.map('mapid').setView([ {{ resultat.coord.lat }},{{ resultat.coord.lon }}], 10);
+        var map = L.map('mapid').setView([ {{ resultat.coord.lat }},{{ resultat.coord.lon }}], 11);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
