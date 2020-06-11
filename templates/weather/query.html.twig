@@ -11,6 +11,9 @@
         <div>
             Voici le dump du résultat
             {{ dump(resultat) }}
+
+            Heure de la prévision: {{ resultat.list[0].dt_txt }}
+            Temps qu'il fait: {{ resultat.list[0].weather[0].main }}
         </div>
     </div>
 {% endblock %}
