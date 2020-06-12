@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Memo{% endblock %}
+
+{% block body %}
+    <h1>Edit Memo</h1>
+
+    {{ include('memo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('memo_index') }}">back to list</a>
+
+    {{ include('memo/_delete_form.html.twig') }}
+{% endblock %}

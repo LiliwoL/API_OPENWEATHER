@@ -14,7 +14,7 @@
         <ul>
             {% for ligne in historique %}
                 <li>
-                    {{ ligne.query|upper }} - <i>{{ ligne.date|date("d/M/Y H:I:S") }}</i>
+                    {{ ligne.query|upper }} - <i>{{ ligne.date|date("d M Y H:i:s") }}</i>
                 </li>
             {% endfor %}
         </ul>

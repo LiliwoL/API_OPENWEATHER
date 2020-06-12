@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Memo index{% endblock %}
+
+{% block body %}
+    <h1>Memo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CityName</th>
+                <th>Memo</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for memo in memos %}
+            <tr>
+                <td>{{ memo.id }}</td>
+                <td>{{ memo.cityName }}</td>
+                <td>{{ memo.memo }}</td>
+                <td>{{ memo.date ? memo.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('memo_show', {'id': memo.id}) }}">show</a>
+                    <a href="{{ path('memo_edit', {'id': memo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('memo_new') }}">Create new</a>
+{% endblock %}

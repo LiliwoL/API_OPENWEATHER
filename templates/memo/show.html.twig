@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Memo{% endblock %}
+
+{% block body %}
+    <h1>Memo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ memo.id }}</td>
+            </tr>
+            <tr>
+                <th>CityName</th>
+                <td>{{ memo.cityName }}</td>
+            </tr>
+            <tr>
+                <th>Memo</th>
+                <td>{{ memo.memo }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ memo.date ? memo.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('memo_index') }}">back to list</a>
+
+    <a href="{{ path('memo_edit', {'id': memo.id}) }}">edit</a>
+
+    {{ include('memo/_delete_form.html.twig') }}
+{% endblock %}

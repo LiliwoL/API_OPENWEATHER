@@ -326,3 +326,130 @@ php bin/console doctrine:migrations:migrate
 ```
 
 Et là, la base et le code sont synchronisés!
+
+
+#### Autre exemple avec une entité Memo
+
+Une table avec les champs suivants:
+* nom de la ville
+* memo (quelqueq lignes)
+* date
+
+##### On crée l'entité correspondante
+
+```bash
+➜  API_OPENWEATHER git:(master) ✗ php bin/console make:entity
+
+ Class name of the entity to create or update (e.g. GentleKangaroo):
+ > Memo
+
+ created: src/Entity/Memo.php
+ created: src/Repository/MemoRepository.php
+ 
+ Entity generated! Now let's add some fields!
+ You can always add more fields later manually or by re-running this command.
+
+ New property name (press <return> to stop adding fields):
+ > cityName
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > 
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > no
+
+ updated: src/Entity/Memo.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > memo
+
+ Field type (enter ? to see all types) [string]:
+ > ?
+
+Main types
+  * string
+  * text
+  * boolean
+  * integer (or smallint, bigint)
+  * float
+
+Relationships / Associations
+  * relation (a wizard 🧙 will help you build the relation)
+  * ManyToOne
+  * OneToMany
+  * ManyToMany
+  * OneToOne
+
+Array/Object Types
+  * array (or simple_array)
+  * json
+  * object
+  * binary
+  * blob
+
+Date/Time Types
+  * datetime (or datetime_immutable)
+  * datetimetz (or datetimetz_immutable)
+  * date (or date_immutable)
+  * time (or time_immutable)
+  * dateinterval
+
+Other Types
+  * decimal
+  * guid
+  * json_array
+
+
+ Field type (enter ? to see all types) [string]:
+ > text
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > yes
+
+ updated: src/Entity/Memo.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > date
+
+ Field type (enter ? to see all types) [string]:
+ > datetime
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > no
+
+ updated: src/Entity/Memo.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > 
+
+
+           
+  Success! 
+           
+
+ Next: When you're ready, create a migration with php bin/console make:migration
+ ```
+On peut générer un CRUD (Create Read Update Delete) rapidement avec:
+
+```bash
+php bin/console make:crud Memo
+
+ created: src/Controller/MemoController.php
+ created: src/Form/MemoType.php
+ created: templates/memo/_delete_form.html.twig
+ created: templates/memo/_form.html.twig
+ created: templates/memo/edit.html.twig
+ created: templates/memo/index.html.twig
+ created: templates/memo/new.html.twig
+ created: templates/memo/show.html.twig
+
+           
+  Success! 
+           
+
+ Next: Check your new CRUD by going to /memo/
+ ```
+ 
