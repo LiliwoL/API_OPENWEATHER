@@ -22,7 +22,7 @@ class WeatherController extends AbstractController
         // A partir du paramètre on va faire appel à l'API
 
         // Récupération des paramètres en GET
-        //$cityName = $request->query->get('query');
+        $cityName = $request->query->get('query');
 
         // Construire l'URL à appeler
         $url = "http://api.openweathermap.org/data/2.5/weather?lang=fr&units=metric&appid=ca18014071190091d4be752b98e34330&q=" . $cityName;

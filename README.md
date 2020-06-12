@@ -1,5 +1,7 @@
 # Projet OpenWEATHER MAP
 
+
+
 ## Monter son dossier en SSHFS avec un script
 
 ```bash
@@ -240,3 +242,10 @@ Et le **template** recevra le paramètre **cityName**
 <h2>Nom de la ville donnée: {{ cityName }}! ✅</h2>
 ```
 
+## Connexion à la base de données
+
+On doit modifier le fichier **.env** avec les informations de la base.
+
+```
+DATABASE_URL=mysql://intervenant_formation_php:MOTDEPASSE@localhost:3306/intervenant_formation_php?serverVersion=5.7
+```
