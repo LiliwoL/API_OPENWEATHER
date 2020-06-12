@@ -292,3 +292,22 @@ Dans le fichier **WeatherController.php**, on va faire une nouvelle instance de 
             return $this->render(
                 ...
 ```
+
+
+
+### Synchronisation avec la base de données
+
+On va taper les commandes suivantes dans le temrinal:
+
+```bash
+php bin/console make:migration
+````
+Ca va nous générer un **fichier de migration** contenant toutes les choses à créer ou mettre à jour dans la base.
+
+Et on execute la moigration:
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+Et là, la base et le code sont synchronisés!

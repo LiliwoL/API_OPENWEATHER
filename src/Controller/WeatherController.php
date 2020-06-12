@@ -40,21 +40,20 @@ class WeatherController extends AbstractController
         {
             // Ajoute dans la base cette recherche
 
-            // On crée une nouvelle entité History
-            // Pensez bien au use en haut du fichier!
-            // use App\Entity\History;
-            $history = new History();
+                // On crée une nouvelle entité History
+                // Pensez bien au use en haut du fichier!
+                // use App\Entity\History;
+                $history = new History();
 
-            // On utilise le setter setQuery pour définir le terme recherché
-            $history->setQuery($cityName);
-            // Idem pour la date
-            $history->setDate(new \DateTime());
+                // On utilise le setter setQuery pour définir le terme recherché
+                $history->setQuery($cityName);
+                // Idem pour la date
+                $history->setDate(new \DateTime());
 
-            var_dump( $history );
-            die;
-
-            // Sauvegarder dans la base
-
+                // Sauvegarder dans la base
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist( $history );
+                $entityManager->flush();
 
             // On enverra le résultat au moteur de template pour affichage
             return $this->render(

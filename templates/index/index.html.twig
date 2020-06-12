@@ -9,5 +9,12 @@
             <input type="text" name="query" placeholder="New York, Istanbul, Bobo Dioulasso..." />
             <button>Chercher</button>
         </form>
+
+        Vous avez déjà cherché ceci:
+        <ul>
+            {% for ville in historique %}
+                <li>{{ ville|upper }}</li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
