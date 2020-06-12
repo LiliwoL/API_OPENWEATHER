@@ -250,6 +250,12 @@ On doit modifier le fichier **.env** avec les informations de la base.
 DATABASE_URL=mysql://intervenant_formation_php:MOTDEPASSE@localhost:3306/intervenant_formation_php?serverVersion=5.7
 ```
 
+Pour vérifier que l'application Symfony et la bibliothèque Doctrine a accès à la base:
+
+```bash
+php bin/console doctrine:schema:validate
+```
+
 ### Création d'une entité
 
 Une entité est une représentation OBJET d'une table de la base de données
@@ -300,8 +306,17 @@ Dans le fichier **WeatherController.php**, on va faire une nouvelle instance de 
 On va taper les commandes suivantes dans le temrinal:
 
 ```bash
-php bin/console make:migration
-````
+➜  API_OPENWEATHER git:(master) ✗ php bin/console make:migration 
+
+           
+  Success! 
+           
+
+ Next: Review the new migration "src/Migrations/Version20200612123511.php"
+ Then: Run the migration with php bin/console doctrine:migrations:migrate
+ See https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html
+```
+
 Ca va nous générer un **fichier de migration** contenant toutes les choses à créer ou mettre à jour dans la base.
 
 Et on execute la moigration:
