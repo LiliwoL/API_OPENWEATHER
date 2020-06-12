@@ -28,6 +28,19 @@
             </div>
         </div>
 
+        {# ==== Affichage des mémos ==== #}
+            {# Test si le tableau n'est pas vide #}
+            {% if memos %}
+                <h2>Liste des mémos pour la ville de {{ resultat.name }}</h2>
+                <ul>
+                    {% for memo in memos %}
+                        <li>{{ memo.memo|e }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {# ==== Affichage des mémos ==== #}
+
+
         <h2>Carte</h2>
 
         <!-- Affichage d'une carte à partir des coordonnées -->

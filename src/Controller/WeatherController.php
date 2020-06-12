@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\History;
+use App\Repository\MemoRepository;
 
 class WeatherController extends AbstractController
 {
@@ -18,7 +19,7 @@ class WeatherController extends AbstractController
      *  name="QueryWeatherCity"
      * )
      */
-    public function query( Request $request, $cityName = "" )
+    public function query( MemoRepository $memoRepository, Request $request, $cityName = "" )
     {
         // A partir du paramètre on va faire appel à l'API
 
@@ -38,8 +39,9 @@ class WeatherController extends AbstractController
         // Test du résultat
         if ( $resultat['cod'] == "200" )
         {
+            // ===================================
             // Ajoute dans la base cette recherche
-
+            // ===================================
                 // On crée une nouvelle entité History
                 // Pensez bien au use en haut du fichier!
                 // use App\Entity\History;
@@ -55,12 +57,24 @@ class WeatherController extends AbstractController
                 $entityManager->persist( $history );
                 $entityManager->flush();
 
+            // ===============================================
+            // On va tester si un memo existe pour cette ville
+            // ===============================================
+                // Ne pas oublier le use
+                // use App\Repository\MemoRepository;
+
+                // On va recherche les memos ayant le champ cityName qui correspond à la requête en cours
+                $memoList = $memoRepository->findBy(['cityName' => $cityName]);
+
             // On enverra le résultat au moteur de template pour affichage
             return $this->render(
                 'weather/query.html.twig', 
                 [
                     'cityName' => $cityName,
-                    'resultat' => $resultat
+                    // Le contenu récupéré depuis l'API
+                    'resultat' => $resultat,
+                    // La liste des mémos sous forme de tableau d'entités
+                    'memos' => $memoList
                 ]
             );
         }else{
