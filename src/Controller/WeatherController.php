@@ -66,6 +66,11 @@ class WeatherController extends AbstractController
                 // On va recherche les memos ayant le champ cityName qui correspond à la requête en cours
                 $memoList = $memoRepository->findBy(['cityName' => $cityName]);
 
+            // ===============
+            // Amadeus POIs
+            // ===============
+            $poisList = $this->getPOIs($resultat['coord']['lat'], $resultat['coord']['lon'] );            
+
             // On enverra le résultat au moteur de template pour affichage
             return $this->render(
                 'weather/query.html.twig', 
@@ -74,7 +79,9 @@ class WeatherController extends AbstractController
                     // Le contenu récupéré depuis l'API
                     'resultat' => $resultat,
                     // La liste des mémos sous forme de tableau d'entités
-                    'memos' => $memoList
+                    'memos' => $memoList,
+                    // La liste des POIS proposés par Amadeus
+                    'pois' => $poisList
                 ]
             );
         }else{
@@ -88,7 +95,37 @@ class WeatherController extends AbstractController
                 ]
             );
         }
-        
+    }
+
+
+    public function getPOIs($lat, $lon)
+    {
+        // A partir de la lat et lon on crée l'url
+        $url = "https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=" . $lat . "&longitude=" . $lon . "&radius=2";
+
+        // Appel à l'API Amadeus
+        $poisList = $this->makeRequest($url,  true);
+
+        // Renvoi le tableau des résultats
+        return $poisList;
+    }
+
+
+
+    /**
+     * Action pour rechercher le temps pour une ville donée
+     * 
+     * @Route(
+     *  "/testamadeus",
+     *  name="Amadeus"
+     * )
+     */
+    public function test()
+    {
+        $resultat = $this->makeRequest("https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=41.397158&longitude=2.160873&radius=2");
+
+        var_dump($resultat);
+        die;
     }
 
     /**
@@ -97,7 +134,7 @@ class WeatherController extends AbstractController
      * @param string $url
      * @return array
      */
-    private function makeRequest ( string $url )
+    private function makeRequest ( string $url, $amadeus = false )
     {
         // Initialisation de cURL
         $ch = curl_init();
@@ -109,6 +146,14 @@ class WeatherController extends AbstractController
 
         // Set the url
         curl_setopt($ch, CURLOPT_URL,$url);
+
+        // Ajout du jeton de connexion
+        if ( $amadeus )
+        {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Authorization: Bearer LIR6zYe1YsABt9Jsgrk4Na6AZ9Ad'
+            ));
+        }
 
         // Execute
         $result=curl_exec($ch);
