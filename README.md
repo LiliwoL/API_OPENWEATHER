@@ -259,3 +259,36 @@ php bin/console make:entity History
 ````
 
 Et on ajoute les champs que l'on souhaite
+
+
+### Ajout d'un nouvel enregistrement dans la base
+
+Dans le fichier **WeatherController.php**, on va faire une nouvelle instance de l'entité **History** comme suit:
+
+```php
+...
+        // Test du résultat
+        if ( $resultat['cod'] == "200" )
+        {
+            // Ajoute dans la base cette recherche
+
+            // On crée une nouvelle entité History
+            // Pensez bien au use en haut du fichier!
+            // use App\Entity\History;
+            $history = new History();
+
+            // On utilise le setter setQuery pour définir le terme recherché
+            $history->setQuery($cityName);
+            // Idem pour la date
+            $history->setDate(new \DateTime());
+
+            var_dump( $history );
+            die;
+
+            // Sauvegarder dans la base
+
+
+            // On enverra le résultat au moteur de template pour affichage
+            return $this->render(
+                ...
+```

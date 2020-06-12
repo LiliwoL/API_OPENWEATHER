@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\History;
 
 class WeatherController extends AbstractController
 {
@@ -37,6 +38,24 @@ class WeatherController extends AbstractController
         // Test du résultat
         if ( $resultat['cod'] == "200" )
         {
+            // Ajoute dans la base cette recherche
+
+            // On crée une nouvelle entité History
+            // Pensez bien au use en haut du fichier!
+            // use App\Entity\History;
+            $history = new History();
+
+            // On utilise le setter setQuery pour définir le terme recherché
+            $history->setQuery($cityName);
+            // Idem pour la date
+            $history->setDate(new \DateTime());
+
+            var_dump( $history );
+            die;
+
+            // Sauvegarder dans la base
+
+
             // On enverra le résultat au moteur de template pour affichage
             return $this->render(
                 'weather/query.html.twig', 
