@@ -12,8 +12,10 @@
 
         Vous avez déjà cherché ceci:
         <ul>
-            {% for ville in historique %}
-                <li>{{ ville|upper }}</li>
+            {% for ligne in historique %}
+                <li>
+                    {{ ligne.query|upper }} - <i>{{ ligne.date|date("d/M/Y H:I:S") }}</i>
+                </li>
             {% endfor %}
         </ul>
     </div>

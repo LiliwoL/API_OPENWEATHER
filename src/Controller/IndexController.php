@@ -5,15 +5,18 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Repository\HistoryRepository;
+
 class IndexController extends AbstractController
 {
     /**
      * @Route("/", name="HomePage")
      */
-    public function index()
+    public function index( HistoryRepository $historyRepository )
     {
         // On va chercher la liste des dernières recherches
-        $liste = ["Rome", "New York", "Ouahigouya"];
+        $liste = $historyRepository->findAll();
+        // $liste est un ARRAY d'entité       
 
         return $this->render('index/index.html.twig', 
         [
