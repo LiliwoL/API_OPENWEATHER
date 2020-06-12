@@ -69,7 +69,7 @@ class WeatherController extends AbstractController
             // ===============
             // Amadeus POIs
             // ===============
-            $poisList = $this->getPOIs($resultat['coord']['lat'], $resultat['coord']['lon'] );            
+            $poisList = $this->getPOIs($resultat['coord']['lat'], $resultat['coord']['lon'] );
 
             // On enverra le résultat au moteur de template pour affichage
             return $this->render(
@@ -81,7 +81,7 @@ class WeatherController extends AbstractController
                     // La liste des mémos sous forme de tableau d'entités
                     'memos' => $memoList,
                     // La liste des POIS proposés par Amadeus
-                    'pois' => $poisList
+                    'pois' => $poisList['data']
                 ]
             );
         }else{
@@ -151,7 +151,7 @@ class WeatherController extends AbstractController
         if ( $amadeus )
         {
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization: Bearer LIR6zYe1YsABt9Jsgrk4Na6AZ9Ad'
+                'Authorization: Bearer 7GqEQYuAoBWXLCq770InwUSoKK0y'
             ));
         }
 

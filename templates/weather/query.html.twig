@@ -40,6 +40,19 @@
             {% endif %}
         {# ==== Affichage des mémos ==== #}
 
+        {# ==== Affichage des POIs ==== #}
+            {# Test si le tableau n'est pas vide #}
+            {% if pois %}
+                <h2>Liste des POIs pour la ville de {{ resultat.name }}</h2>
+                {{ dump(pois) }}
+                <ul>
+                    {% for POI in pois %}
+                        <li>Vous pouvez aller visiter: {{ POI.name|upper }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {# ==== Affichage des POIs ==== #}
+
 
         <h2>Carte</h2>
 
@@ -74,6 +87,16 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; CESI Superbe formation PHP'
         }).addTo(map);
+
+        {# Si on a des POIS on affiche les markers #}
+        {% if pois %}
+            // Markers basé sur les POIS AMADEUS
+            {% for POI in pois %}
+                L.marker([{{ POI.geoCode.latitude }}, {{ POI.geoCode.longitude }}]).addTo(map)
+                    .bindPopup('{{ POI.name|upper }}');
+            {% endfor %}
+            {# {{ dump(pois) }} #}
+        {% endif %}        
     </script>
 
     <!-- Chargement d'un script depuis le dossier des assets -->
