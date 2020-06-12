@@ -249,3 +249,13 @@ On doit modifier le fichier **.env** avec les informations de la base.
 ```
 DATABASE_URL=mysql://intervenant_formation_php:MOTDEPASSE@localhost:3306/intervenant_formation_php?serverVersion=5.7
 ```
+
+### Création d'une entité
+
+Une entité est une représentation OBJET d'une table de la base de données
+
+```bash
+php bin/console make:entity History
+````
+
+Et on ajoute les champs que l'on souhaite
