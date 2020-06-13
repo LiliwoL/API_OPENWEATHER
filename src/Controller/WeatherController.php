@@ -69,7 +69,7 @@ class WeatherController extends AbstractController
             // ===============
             // Amadeus POIs
             // ===============
-            $poisList = $this->getPOIs($resultat['coord']['lat'], $resultat['coord']['lon'] );
+                $poisList = $this->getPOIs($resultat['coord']['lat'], $resultat['coord']['lon'] );
 
             // On enverra le résultat au moteur de template pour affichage
             return $this->render(
